@@ -259,6 +259,9 @@ $app->post('/transaction/save/', function ($request, $response, $args) {
 	}
 
 	if(!empty($transId) && !empty($transProds)) {
+		$db->where('id_transaction', $transId);
+		$db->delete('transaction_products');
+
 		foreach($transProds as $product) {
 			$addP = array(
 				'id_product'     => $product['id'],
